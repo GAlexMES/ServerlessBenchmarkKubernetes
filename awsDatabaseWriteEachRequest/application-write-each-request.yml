@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: application-write-request
+spec:
+  selector:
+    matchLabels:
+      run: application-write-request
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: application-write-request
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: application-write-request
+        image: docker.fslab.de/abrenn2s/masterthesis:write-request
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            cpu: 500m
+          requests:
+            cpu: 200m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: application-write-request
+  labels:
+    run: application-write-request
+spec:
+  type: NodePort  
+  ports:
+  - port: 8080
+    targetPort: 8080
+    nodePort: 30009
+  selector:
+    run: application-write-request

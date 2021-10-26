@@ -1,0 +1,12 @@
+{
+  "name": "kubernetes-payload",
+  "version": "1.0.0",
+  "description": "node function with an increasing payload size",
+  "main": "handler.js",
+  "scripts": {
+    "start": "node ./handler.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

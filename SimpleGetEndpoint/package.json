@@ -1,0 +1,12 @@
+{
+  "name": "kubernetes-simple-get",
+  "version": "1.0.0",
+  "description": "node function with a hello world get endpoint",
+  "main": "handler.js",
+  "scripts": {
+    "start": "node ./handler.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

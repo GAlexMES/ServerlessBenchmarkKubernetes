@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: application-simple-get
+spec:
+  selector:
+    matchLabels:
+      run: application-simple-get
+  template:
+    metadata:
+      labels:
+        run: application-simple-get
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: application-simple-get
+        image: docker.fslab.de/abrenn2s/masterthesis:simpleget
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            cpu: 500m
+          requests:
+            cpu: 200m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: application-simple-get
+  labels:
+    run: application-simple-get
+spec:
+  type: NodePort  
+  ports:
+  - port: 8080
+    targetPort: 8080
+    nodePort: 30007
+  selector:
+    run: application-simple-get
